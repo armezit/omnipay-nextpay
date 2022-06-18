@@ -18,7 +18,7 @@ class RefundOrderResponse extends AbstractResponse
      */
     public function isSuccessful()
     {
-        return $this->getCode() === 200 && $this->data['code'] === -90;
+        return $this->getHttpStatus() === 200 && $this->getCode() === -90;
     }
 
 }

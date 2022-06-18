@@ -20,7 +20,7 @@ class CreateTokenResponse extends AbstractResponse implements RedirectResponseIn
      */
     public function isSuccessful()
     {
-        return $this->getCode() === 200 && $this->data['code'] === -1;
+        return $this->getHttpStatus() === 200 && $this->getCode() === -1;
     }
 
     /**
@@ -28,7 +28,7 @@ class CreateTokenResponse extends AbstractResponse implements RedirectResponseIn
      */
     public function isRedirect()
     {
-        return $this->data['code'] === -1 &&
+        return $this->getCode() === -1 &&
             isset($this->data['trans_id']) &&
             !empty($this->data['trans_id']);
     }

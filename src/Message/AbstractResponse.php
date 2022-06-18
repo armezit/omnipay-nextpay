@@ -82,7 +82,7 @@ abstract class AbstractResponse extends \Omnipay\Common\Message\AbstractResponse
      */
     public function getMessage()
     {
-        return isset($this->errorCodes[$this->getCode()]) ? $this->errorCodes[$this->getCode()] : parent::getMessage();
+        return $this->errorCodes[(string)$this->getCode()] ?? parent::getMessage();
     }
 
     /**
@@ -92,7 +92,17 @@ abstract class AbstractResponse extends \Omnipay\Common\Message\AbstractResponse
      */
     public function getCode()
     {
-        return isset($this->data['httpStatus']) ? $this->data['httpStatus'] : parent::getCode();
+        return $this->data['code'] ?? parent::getCode();
+    }
+
+    /**
+     * Http status code
+     *
+     * @return null|int A response code from the payment gateway
+     */
+    public function getHttpStatus(): ?int
+    {
+        return $this->data['httpStatus'] ?? null;
     }
 
 }
