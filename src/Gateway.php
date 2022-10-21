@@ -117,5 +117,4 @@ class Gateway extends AbstractGateway
     {
         return 'trans_id';
     }
-
 }

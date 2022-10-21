@@ -18,7 +18,6 @@ use Omnipay\Common\Message\ResponseInterface;
  */
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 {
-
     /**
      * Live Endpoint URL
      *
@@ -225,7 +224,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
             $result = !empty($json) ? json_decode($json, true) : [];
             $result['httpStatus'] = $httpResponse->getStatusCode();
             return $this->response = $this->createResponse($result);
-
         } catch (Exception $e) {
             throw new InvalidResponseException(
                 'Error communicating with payment gateway: ' . $e->getMessage(),
@@ -233,5 +231,4 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
             );
         }
     }
-
 }

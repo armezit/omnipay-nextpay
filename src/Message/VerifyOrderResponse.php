@@ -12,7 +12,6 @@ namespace Omnipay\Nextpay\Message;
  */
 class VerifyOrderResponse extends AbstractResponse
 {
-
     /**
      * @inheritDoc
      */
@@ -38,5 +37,4 @@ class VerifyOrderResponse extends AbstractResponse
     {
         return $this->getHttpStatus() === 200 && $this->getCode() !== 0;
     }
-
 }

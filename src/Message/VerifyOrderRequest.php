@@ -14,7 +14,6 @@ use Omnipay\Common\Exception\InvalidRequestException;
  */
 class VerifyOrderRequest extends AbstractRequest
 {
-
     /**
      * @inheritDoc
      */
@@ -60,5 +59,4 @@ class VerifyOrderRequest extends AbstractRequest
     {
         return new VerifyOrderResponse($this, $data);
     }
-
 }

@@ -14,7 +14,6 @@ use Omnipay\Common\Message\RedirectResponseInterface;
  */
 class CreateTokenResponse extends AbstractResponse implements RedirectResponseInterface
 {
-
     /**
      * @return bool
      */
@@ -60,5 +59,4 @@ class CreateTokenResponse extends AbstractResponse implements RedirectResponseIn
     {
         return $this->data['trans_id'];
     }
-
 }

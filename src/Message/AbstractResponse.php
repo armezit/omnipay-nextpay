@@ -104,5 +104,4 @@ abstract class AbstractResponse extends \Omnipay\Common\Message\AbstractResponse
     {
         return (int)($this->data['httpStatus'] ?? null);
     }
-
 }

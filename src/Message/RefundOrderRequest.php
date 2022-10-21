@@ -14,7 +14,6 @@ use Omnipay\Common\Exception\InvalidRequestException;
  */
 class RefundOrderRequest extends AbstractRequest
 {
-
     /**
      * @inheritDoc
      */
