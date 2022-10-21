@@ -18,7 +18,9 @@ class VerifyOrderResponse extends AbstractResponse
      */
     public function getTransactionReference()
     {
-        return $this->request->getTransactionReference();
+        /** @var VerifyOrderRequest $request */
+        $request = $this->request;
+        return $request->getTransactionReference();
     }
 
     /**
@@ -26,7 +28,7 @@ class VerifyOrderResponse extends AbstractResponse
      */
     public function isSuccessful()
     {
-        return $this->getHttpStatus() === 200 && $this->getCode() === 0;
+        return $this->getHttpStatus() === 200 && (int)$this->getCode() === 0;
     }
 
     /**

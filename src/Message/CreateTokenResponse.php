@@ -16,19 +16,19 @@ class CreateTokenResponse extends AbstractResponse implements RedirectResponseIn
 {
 
     /**
-     * @inheritDoc
+     * @return bool
      */
     public function isSuccessful()
     {
-        return $this->getHttpStatus() === 200 && $this->getCode() === -1;
+        return (int)$this->getHttpStatus() === 200 && (int)$this->getCode() === -1;
     }
 
     /**
-     * @inheritDoc
+     * @return bool
      */
     public function isRedirect()
     {
-        return $this->getCode() === -1 &&
+        return (int)$this->getCode() === -1 &&
             isset($this->data['trans_id']) &&
             !empty($this->data['trans_id']);
     }
@@ -38,7 +38,9 @@ class CreateTokenResponse extends AbstractResponse implements RedirectResponseIn
      */
     public function getRedirectUrl()
     {
-        return sprintf('%s/payment/%s', $this->request->getEndpoint(), $this->getTransactionReference());
+        /** @var CreateTokenRequest $request */
+        $request = $this->request;
+        return sprintf('%s/payment/%s', $request->getEndpoint(), $this->getTransactionReference());
     }
 
     /**
@@ -46,7 +48,9 @@ class CreateTokenResponse extends AbstractResponse implements RedirectResponseIn
      */
     public function getTransactionId()
     {
-        return $this->request->getTransactionId();
+        /** @var CreateTokenRequest $request */
+        $request = $this->request;
+        return $request->getTransactionId();
     }
 
     /**

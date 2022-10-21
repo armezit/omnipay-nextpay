@@ -8,6 +8,7 @@
 namespace Omnipay\Nextpay\Message;
 
 use Exception;
+use RuntimeException;
 use Omnipay\Common\Exception\InvalidRequestException;
 use Omnipay\Common\Exception\InvalidResponseException;
 use Omnipay\Common\Message\ResponseInterface;
@@ -76,7 +77,8 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
             $value = parent::getAmount();
         }
 
-        return $value ?: $this->httpRequest->query->get('Amount');
+        $value = $value ?: $this->httpRequest->query->get('Amount');
+        return (string)$value;
     }
 
     /**
@@ -198,11 +200,18 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
      *
      * @param mixed $data The data to send.
      * @return ResponseInterface
+     * @throws RuntimeException
      * @throws InvalidResponseException
      */
     public function sendData($data)
     {
         try {
+            $body = json_encode($data);
+
+            if ($body === false) {
+                throw new RuntimeException('Err in access/refresh token.');
+            }
+
             $httpResponse = $this->httpClient->request(
                 $this->getHttpMethod(),
                 $this->createUri($this->getEndpoint()),
@@ -210,7 +219,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
                     'Accept' => 'application/json',
                     'Content-type' => 'application/json',
                 ],
-                json_encode($data)
+                $body
             );
             $json = $httpResponse->getBody()->getContents();
             $result = !empty($json) ? json_decode($json, true) : [];

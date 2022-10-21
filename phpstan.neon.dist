@@ -1,0 +1,8 @@
+parameters:
+    level: 8
+    paths:
+        - src
+    excludePaths:
+        - src/storage/
+    tmpDir: .build/phpstan
+    checkMissingIterableValueType: false

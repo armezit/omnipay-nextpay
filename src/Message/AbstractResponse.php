@@ -98,11 +98,11 @@ abstract class AbstractResponse extends \Omnipay\Common\Message\AbstractResponse
     /**
      * Http status code
      *
-     * @return null|int A response code from the payment gateway
+     * @return int A response code from the payment gateway
      */
-    public function getHttpStatus(): ?int
+    public function getHttpStatus(): int
     {
-        return $this->data['httpStatus'] ?? null;
+        return (int)($this->data['httpStatus'] ?? null);
     }
 
 }
